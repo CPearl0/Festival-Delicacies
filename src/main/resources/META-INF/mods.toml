@@ -1,25 +1,21 @@
 modLoader="javafml"
-loaderVersion="[43,)"
-license="MIT License"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
 [[mods]]
-modId="festival_delicacies"
-version="${file.jarVersion}"
-displayName="Festival Delicacies"
-logoFile="logo.png"
-logoBlur=false
-authors="FoggyHillside"
-description='''
-Some traditoinal Chinese festival delicacies.
-'''
-[[dependencies.festival_delicacies]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
+description='''${mod_description}'''
+[[dependencies.${mod_id}]]
     modId="forge"
     mandatory=true
-    versionRange="[43,)"
+    versionRange="${forge_version_range}"
     ordering="NONE"
     side="BOTH"
-[[dependencies.festival_delicacies]]
+[[dependencies.${mod_id}]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.2,1.20)"
+    versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"

@@ -25,14 +25,14 @@ public class StoveMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public StoveMenu(int id, Inventory inventory, FriendlyByteBuf extraData) {
-        this(id, inventory, inventory.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+        this(id, inventory, inventory.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
     public StoveMenu(int id, Inventory inventory, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.STOVE_MENU.get(), id);
         checkContainerSize(inventory, 11);
         this.entity = (StoveEntity) entity;
-        this.level = inventory.player.level;
+        this.level = inventory.player.level();
         this.data = data;
 
         addPlayerHotbar(inventory);
@@ -41,13 +41,13 @@ public class StoveMenu extends AbstractContainerMenu {
         this.entity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
             this.addSlot(new SlotItemHandler(handler, 0, 30, 17));
             this.addSlot(new SlotItemHandler(handler, 1, 48, 17));
-            this.addSlot(new StoveSlot(inventory.player.level, inventory.player, this.entity, handler, 2, 66, 17));
+            this.addSlot(new StoveSlot(inventory.player.level(), inventory.player, this.entity, handler, 2, 66, 17));
             this.addSlot(new SlotItemHandler(handler, 3, 30, 35));
             this.addSlot(new SlotItemHandler(handler, 4, 48, 35));
-            this.addSlot(new StoveSlot(inventory.player.level, inventory.player, this.entity, handler, 5, 66, 35));
-            this.addSlot(new StoveSlot(inventory.player.level, inventory.player, this.entity, handler, 6, 30, 53));
-            this.addSlot(new StoveSlot(inventory.player.level, inventory.player, this.entity, handler, 7, 48, 53));
-            this.addSlot(new StoveSlot(inventory.player.level, inventory.player, this.entity, handler, 8, 66, 53));
+            this.addSlot(new StoveSlot(inventory.player.level(), inventory.player, this.entity, handler, 5, 66, 35));
+            this.addSlot(new StoveSlot(inventory.player.level(), inventory.player, this.entity, handler, 6, 30, 53));
+            this.addSlot(new StoveSlot(inventory.player.level(), inventory.player, this.entity, handler, 7, 48, 53));
+            this.addSlot(new StoveSlot(inventory.player.level(), inventory.player, this.entity, handler, 8, 66, 53));
             this.addSlot(new SlotItemHandler(handler, 9, 93, 17));
             this.addSlot(new ResultSlot(inventory.player, this.entity, handler, 10, 124, 36));
         });

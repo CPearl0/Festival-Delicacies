@@ -36,7 +36,7 @@ public class JEIPlugin implements IModPlugin {
 
     @Override
     public ResourceLocation getPluginUid() {
-        return new ResourceLocation(FestivalDelicacies.MOD_ID, "jei_plugin");
+        return new ResourceLocation(FestivalDelicacies.MODID, "jei_plugin");
 
     }
 

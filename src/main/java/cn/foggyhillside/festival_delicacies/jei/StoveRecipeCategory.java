@@ -3,6 +3,7 @@ package cn.foggyhillside.festival_delicacies.jei;
 import cn.foggyhillside.festival_delicacies.FestivalDelicacies;
 import cn.foggyhillside.festival_delicacies.recipe.StoveRecipe;
 import cn.foggyhillside.festival_delicacies.registry.ModBlocks;
+import cn.foggyhillside.festival_delicacies.util.RecipeUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -15,6 +16,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -27,10 +29,10 @@ import java.util.Arrays;
 @MethodsReturnNonnullByDefault
 public class StoveRecipeCategory implements IRecipeCategory<StoveRecipe> {
 
-    public static final ResourceLocation UID = new ResourceLocation(FestivalDelicacies.MOD_ID,
+    public static final ResourceLocation UID = new ResourceLocation(FestivalDelicacies.MODID,
             "stove");
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(FestivalDelicacies.MOD_ID,
+    public static final ResourceLocation TEXTURE = new ResourceLocation(FestivalDelicacies.MODID,
             "textures/gui/pot_stove_gui_jei.png");
 
 
@@ -76,15 +78,15 @@ public class StoveRecipeCategory implements IRecipeCategory<StoveRecipe> {
     }
 
     @Override
-    public void draw(StoveRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
-        this.arrow.draw(matrixStack, 89, 35);
+    public void draw(StoveRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        this.arrow.draw(guiGraphics, 89, 35);
         if (recipe.getContainer() != ItemStack.EMPTY) {
-            this.containerSlot.draw(matrixStack, 93, 17);
+            this.containerSlot.draw(guiGraphics, 93, 17);
         }
         if (recipe.getNeedPot()) {
-            this.pot.draw(matrixStack, 94, 54);
+            this.pot.draw(guiGraphics, 94, 54);
         } else {
-            this.lit.draw(matrixStack, 94, 52);
+            this.lit.draw(guiGraphics, 94, 52);
         }
     }
 
@@ -119,6 +121,6 @@ public class StoveRecipeCategory implements IRecipeCategory<StoveRecipe> {
         if (recipe.getContainer() != ItemStack.EMPTY) {
             builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 93, 17).addItemStack(recipe.getContainer());
         }
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 124, 36).addItemStack(recipe.getResultItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 124, 36).addItemStack(RecipeUtils.getResultItem(recipe));
     }
 }

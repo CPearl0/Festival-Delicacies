@@ -1,12 +1,10 @@
 package cn.foggyhillside.festival_delicacies.blocks.container;
 
 import cn.foggyhillside.festival_delicacies.blocks.entities.StoveEntity;
-import cn.foggyhillside.festival_delicacies.registry.ModBlocks;
 import cn.foggyhillside.festival_delicacies.tag.ModTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 

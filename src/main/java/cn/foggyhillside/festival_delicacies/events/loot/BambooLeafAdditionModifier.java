@@ -34,8 +34,7 @@ public class BambooLeafAdditionModifier extends LootModifier {
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         if (context.getRandom().nextFloat() > 0.6) {
             generatedLoot.add(new ItemStack(item, 1));
-        }
-        ;
+        };
         return generatedLoot;
     }
 

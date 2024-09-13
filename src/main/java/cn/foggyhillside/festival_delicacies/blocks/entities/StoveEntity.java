@@ -1,10 +1,11 @@
 package cn.foggyhillside.festival_delicacies.blocks.entities;
 
 import cn.foggyhillside.festival_delicacies.blocks.StoveBlock;
+import cn.foggyhillside.festival_delicacies.blocks.screen.StoveMenu;
 import cn.foggyhillside.festival_delicacies.recipe.StoveRecipe;
 import cn.foggyhillside.festival_delicacies.registry.ModBlockEntities;
-import cn.foggyhillside.festival_delicacies.blocks.screen.StoveMenu;
 import cn.foggyhillside.festival_delicacies.tag.ModTags;
+import cn.foggyhillside.festival_delicacies.util.RecipeUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -17,16 +18,13 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
@@ -152,8 +150,8 @@ public class StoveEntity extends BlockEntity implements MenuProvider {
 
     private static boolean canOutput(StoveEntity entity, Optional<StoveRecipe> recipe) {
         return entity.itemStackHandler.getStackInSlot(10) == ItemStack.EMPTY
-                || (entity.itemStackHandler.getStackInSlot(10).getItem() == recipe.get().getResultItem().getItem()
-                && entity.itemStackHandler.getStackInSlot(10).getCount() < recipe.get().getResultItem().getItem().getMaxStackSize());
+                || (entity.itemStackHandler.getStackInSlot(10).getItem() == RecipeUtils.getResultItem(recipe.get()).getItem()
+                && entity.itemStackHandler.getStackInSlot(10).getCount() < RecipeUtils.getResultItem(recipe.get()).getItem().getMaxStackSize());
     }
 
     private static boolean hasRecipe(StoveEntity entity, Optional<StoveRecipe> recipe) {
@@ -192,9 +190,9 @@ public class StoveEntity extends BlockEntity implements MenuProvider {
                     entity.itemStackHandler.extractItem(i, 1, false);
                 }
             }
-            entity.itemStackHandler.setStackInSlot(10, new ItemStack(recipe.get().getResultItem().getItem(),
+            entity.itemStackHandler.setStackInSlot(10, new ItemStack(recipe.get().getResultItem(level.registryAccess()).getItem(),
                     entity.itemStackHandler.getStackInSlot(10).getCount()
-                            + recipe.get().getResultItem().getCount()));
+                            + RecipeUtils.getResultItem(recipe.get()).getCount()));
             entity.resetProgress();
         }
     }

@@ -6,20 +6,20 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlocks {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FestivalDelicacies.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FestivalDelicacies.MODID);
 
     public static final RegistryObject<Block> STOVE = BLOCKS.register("stove",
-            () -> new StoveBlock(BlockBehaviour.Properties.of(Material.STONE).strength(2.0F).requiresCorrectToolForDrops().noOcclusion().lightLevel((state) -> {
+            () -> new StoveBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2.0F).requiresCorrectToolForDrops().noOcclusion().lightLevel((state) -> {
                 return state.getValue(BlockStateProperties.LIT) ? 13 : 0;
             })));
     public static final RegistryObject<Block> POT = BLOCKS.register("pot",
-            () -> new PotBlock(BlockBehaviour.Properties.of(Material.METAL).strength(1.0F).noOcclusion()));
+            () -> new PotBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(1.0F).noOcclusion()));
 
     public static final RegistryObject<Block> CHINESE_CABBAGE = BLOCKS.register("chinese_cabbage",
             () -> new ChineseCabbageBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));

@@ -1,18 +1,20 @@
 package cn.foggyhillside.festival_delicacies.recipe;
 
 import cn.foggyhillside.festival_delicacies.FestivalDelicacies;
-import cn.foggyhillside.festival_delicacies.blocks.entities.StoveEntity;
-import cn.foggyhillside.festival_delicacies.tag.ModTags;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.util.RecipeMatcher;
@@ -90,7 +92,7 @@ public class StoveRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public ItemStack assemble(SimpleContainer container) {
+    public ItemStack assemble(SimpleContainer container, RegistryAccess access) {
         return output;
     }
 
@@ -100,7 +102,7 @@ public class StoveRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess access) {
         return output.copy();
     }
 
@@ -132,7 +134,7 @@ public class StoveRecipe implements Recipe<SimpleContainer> {
         public static final Serializer INSTANCE = new Serializer();
 
         public static final ResourceLocation ID =
-                new ResourceLocation(FestivalDelicacies.MOD_ID, "stove");
+                new ResourceLocation(FestivalDelicacies.MODID, "stove");
 
         @Override
         public StoveRecipe fromJson(ResourceLocation location, JsonObject json) {

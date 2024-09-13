@@ -5,7 +5,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 
 public class FoodList {
-
     public static final FoodProperties SWEET_ZONGZI = new FoodProperties.Builder().nutrition(7).saturationMod(0.6F).build();
     public static final FoodProperties MEAT_ZONGZI = new FoodProperties.Builder().nutrition(9).saturationMod(0.6F).build();
     public static final FoodProperties QINGTUAN = new FoodProperties.Builder().nutrition(6).saturationMod(0.6F).build();
